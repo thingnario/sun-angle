@@ -200,7 +200,7 @@ def elevationRadians(lat, dec, ha):
 ##    return (az)
 
 def max_min(v, max_v=1, min_v=-1):
-    return min(max(a, min_v), max_v)
+    return min(max(v, min_v), max_v)
 
 def solarAzimuthRadiansCharlie(lat, dec, ha):
     zenith_value = math.sin(lat) * math.sin(dec) + math.cos(lat) * math.cos(dec) * math.cos(ha)
