@@ -199,9 +199,14 @@ def elevationRadians(lat, dec, ha):
 ##    if not cosAzPos: az = math.pi-az
 ##    return (az)
 
+def max_min(v, max_v=1, min_v=-1):
+    return min(max(a, min_v), max_v)
+
 def solarAzimuthRadiansCharlie(lat, dec, ha):
-    zenithAngle = math.acos(math.sin(lat) * math.sin(dec) + math.cos(lat) * math.cos(dec) * math.cos(ha))
-    az = math.acos((math.sin(lat) * math.cos(zenithAngle) - math.sin(dec)) / (math.cos(lat) * math.sin(zenithAngle)))
+    zenith_value = math.sin(lat) * math.sin(dec) + math.cos(lat) * math.cos(dec) * math.cos(ha)
+    zenithAngle = math.acos(max_min(zenith_value))
+    az_value = (math.sin(lat) * math.cos(zenithAngle) - math.sin(dec)) / (math.cos(lat) * math.sin(zenithAngle))
+    az = math.acos(max_min(az_value))
     if ha > 0:
         az = az + math.pi
     else:
